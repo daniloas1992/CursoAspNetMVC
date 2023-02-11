@@ -9,3 +9,15 @@
 {
     <li>@Html.DisplayFor(model => cliente.Nome) @Html.DisplayFor(model => cliente.Sobrenome)</li>
 }
+
+@section scripts  <!-- Definido em _Layout.cshtml em: RenderSection("scripts", required: false)  -->
+{
+    <script>
+        $(document).ready(function () {
+            $("li").click(function () {
+                $(this).hide();
+            });
+        });
+    </script>
+}
+
