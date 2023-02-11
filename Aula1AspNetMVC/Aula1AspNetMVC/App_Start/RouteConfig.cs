@@ -19,7 +19,7 @@ namespace Aula1AspNetMVC
                 defaults: new
                 {
                     controller = "Home",
-                    action = "Index",
+                    action = "Index"
                     //id = UrlParameter.Optional,
                     //nome = UrlParameter.Optional 
                 }

@@ -19,6 +19,11 @@ namespace Aula1AspNetMVC.Controllers
                 DataCadastro = DateTime.Now,
                 Id = 1
             };
+
+            ViewBag.Cliente = cliente;
+
+            //ViewData["Cliente"] = cliente;
+
             return View(cliente); // Se o ActionResult tiver nome diferente precia passar o nome da view como parâmetro
                                  // return View("Index", cliente)
         }
@@ -50,7 +55,18 @@ namespace Aula1AspNetMVC.Controllers
 
             // http://localhost:28645/Cliente/PesquisaCliente/idCliente=1&nomeCliente=João
 
+            if (!cliente.Any())
+            {
+                TempData["error"] = "Nenhum cliente selecionado!";
+                return RedirectToAction("ErroPesquisa");
+            }
+
             return View("ListaClientes", cliente);
+        }
+
+        public ActionResult ErroPesquisa()
+        {
+            return View("Error");
         }
     }
 }
