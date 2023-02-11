@@ -14,6 +14,19 @@ namespace Aula1AspNetMVC
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Secundaria",
+                url: "{controller}/{action}/{idCliente}/{nomeCliente}",
+                defaults: new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    //id = UrlParameter.Optional,
+                    //nome = UrlParameter.Optional 
+                }
+            );
+
+            // Rota mais genérica fica no final
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

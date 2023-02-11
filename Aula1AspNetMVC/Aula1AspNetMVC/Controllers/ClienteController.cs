@@ -36,7 +36,7 @@ namespace Aula1AspNetMVC.Controllers
             return View(listaClientes);
         }
 
-        public ActionResult PesquisaCliente(int? id, string nome)  // http://localhost:28645/Cliente/PesquisaCliente/1?nome=João
+        public ActionResult PesquisaCliente(int? idCliente, string nomeCliente)  // http://localhost:28645/Cliente/PesquisaCliente/1?nomeCliente=João
         {
             var listaClientes = new List<Cliente>()
             {
@@ -46,7 +46,9 @@ namespace Aula1AspNetMVC.Controllers
                 new Cliente() {Nome = "Paula", Sobrenome = "Silva", DataCadastro = DateTime.Now, Id = 4}
             };
 
-            var cliente = listaClientes.Where(c => c.Nome == nome).ToList();
+            var cliente = listaClientes.Where(c => c.Nome == nomeCliente).ToList();
+
+            // http://localhost:28645/Cliente/PesquisaCliente/idCliente=1&nomeCliente=João
 
             return View("ListaClientes", cliente);
         }
