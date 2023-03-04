@@ -1,0 +1,22 @@
+﻿@model List<DesafioJogos.Models.Jogo>
+@{
+    ViewBag.Title = "ListaJogos";
+}
+
+<h2>ListaJogos</h2>
+
+@foreach (var jogo in Model)
+{
+    <li>@Html.DisplayFor(model => jogo.Id) - @Html.DisplayFor(model => jogo.Nome)</li>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("li").click(function () {
+                $(this).hide();
+            });
+        });
+    </script>
+}

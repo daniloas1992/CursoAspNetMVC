@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Aula1AspNetMVC.Models;
+using Aula1AspNetMVC.Context;
 
 namespace Aula1AspNetMVC.Controllers
 {
@@ -12,13 +13,17 @@ namespace Aula1AspNetMVC.Controllers
         // GET: Cliente
         public ActionResult Index()  // É o nome da view Index.cshtml
         {
-            var cliente = new Cliente()
+            /*var cliente = new Cliente()
             {
                 Nome = "ASP",
                 Sobrenome = "NET",
                 DataCadastro = DateTime.Now,
                 Id = 1
-            };
+            };*/
+
+            //var cliente = new Aula1Context().Cliente.Where(c => c.Id == 1).SingleOrDefault();
+
+            var cliente = new Aula1Context().Cliente.SingleOrDefault(c => c.Id == 1);
 
             ViewBag.Cliente = cliente;
 
