@@ -1,0 +1,105 @@
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<Aula1AspNetMVC.Models.Cliente>
+
+
+@{
+    ViewBag.Title = "Teste";
+}
+
+@*Documenta seu código*@
+
+<div>@Html.Raw(ViewBag.Ola)</div>
+
+@{
+    foreach(var cliente in Model)
+    {
+        <div>@Html.Hidden("Id", cliente.Id)</div>
+        <div>@Html.Label("txtNome", "Nome: ", new {text = "Nome:", @class = "control-label col-md-2" })</div>
+    
+        <div>
+            @Html.TextBox("txNome", cliente.Nome)
+            @Html.TextBoxFor(model => cliente.Nome)
+            @Html.EditorFor(model => cliente.Nome)
+        </div>
+    
+        <div>@Html.TextArea("txtNome2", new {rows=5})</div>
+    
+        <div>@Html.ActionLink("Clique aqui", "Edit", new {cliente.Id})</div>
+    
+        <div>@Html.LabelFor(model => cliente.Nome)</div>
+          
+        <div>@Html.DisplayNameFor(model => model.Nome)</div>
+    
+        <div>
+            @Html.RadioButton("corFavorita", "Azul", true) Azul
+            @Html.RadioButton("corFavorita", "Amarelo", false) Amarelo
+            @Html.RadioButton("corFavorita", "Branco", false) Branco
+            @Html.RadioButton("corFavorita", "Verde", false) Verde
+            @Html.RadioButton("corFavorita", "Vermelho", false) Vermelho
+        </div>
+    
+        <div>
+            @Html.ListBox("ListaCores",
+            new SelectList(
+                  new List<String>()
+                  {
+                      "Azul",
+                      "Amarelo",
+                      "Branco",
+                      "Verde",
+                      "Vermelho"
+                  }
+                )            
+            )
+        </div>
+    
+        <div>
+            @Html.DropDownList("drpListCores",
+             new SelectList(
+                  new List<String>()
+                  {
+                      "Azul",
+                      "Amarelo",
+                      "Branco",
+                      "Verde",
+                      "Vermelho"
+                  }
+                )  
+            )
+        </div>
+    
+        <div>
+            @Html.DropDownListFor(c => cliente.Nome, new SelectList(Model, "id", "Nome"))
+        </div>
+    
+        <div>
+            @Html.DropDownList("Id", String.Empty) <!-- É a ViewBag.Id da Controller--> 
+        </div>
+    
+        <div>
+            @Html.CheckBox("Certificado", false) Deseja receber o Certificado
+        </div>
+    
+        <!-- Partial view-->
+        <div>
+            @Html.Partial("_Saudacao")
+        </div>
+        
+        <div>
+            @{
+                var teste = Html.Partial("_Saudacao");
+            }
+        </div>
+    
+        <div>
+            @{
+                Html.RenderPartial("_Saudacao");
+            }           
+        </div>
+    
+        <div>
+            <a href="@Url.Action("About", "Home")">Clique Aqui 2</a>
+        </div>
+    
+    }
+}
