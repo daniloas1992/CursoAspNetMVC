@@ -26,6 +26,32 @@ namespace Aula1AspNetMVC.Controllers
             return View(db.Cliente.ToList());
         }
 
+        [OutputCache(Duration = 30, VaryByParam = "id")] // VaryByParam="id, nome"  // VaryByParam="*"
+        public ContentResult Teste1(int id)
+        {
+            return Content(DateTime.Now.ToString());
+        }
+
+
+        public ActionResult Teste2()
+        {
+            //return Json(db.Cliente.ToList(), JsonRequestBehavior.AllowGet);
+
+            //return Content("Teste");
+
+            //return JavaScript("<script>alert('olá');</script>");
+
+            //return File();
+
+            return new HttpUnauthorizedResult();
+        }
+
+        public JsonResult Teste3()
+        {
+            return Json(db.Cliente.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+
         // GET: Clientes
         public ActionResult Index()
         {
@@ -58,10 +84,17 @@ namespace Aula1AspNetMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Sobrenome,DataCadastro")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "Id,Nome,Sobrenome,Email")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
+                if(!cliente.Email.Contains(".br"))
+                {
+                    ModelState.AddModelError(String.Empty, "E-mail precisa ser do Brasil!");
+                    return View(cliente);
+                }
+
+                cliente.DataCadastro = DateTime.Now;
                 db.Cliente.Add(cliente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
